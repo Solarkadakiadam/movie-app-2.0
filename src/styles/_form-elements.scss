@@ -1,0 +1,41 @@
+@use "./_variables" as vars;
+
+button {
+  padding: 0.5em 1em;
+  background-color: vars.$primary-color;
+  color: white;
+  border: none;
+  border-radius: vars.$border-radius;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+  &:hover {
+    background-color: vars.$hover-color;
+  }
+}
+
+input,
+select {
+  background-color: transparent;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: vars.$border-radius;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+@media (max-width: 768px) {
+  label {
+    justify-content: space-between;
+    width: 100%;
+  }
+}

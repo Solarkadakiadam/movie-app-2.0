@@ -1,0 +1,7 @@
+@use "./_variables" as vars;
+
+:root {
+  font-family: vars.$font-family;
+  color: vars.$text-color;
+  background-color: vars.$light-bg;
+}

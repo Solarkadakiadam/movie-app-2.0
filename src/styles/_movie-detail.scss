@@ -1,0 +1,96 @@
+@use "./_variables" as vars;
+
+.movie-detail {
+  padding: 30px;
+  background-color: vars.$light-bg;
+  color: vars.$text-color;
+  border-radius: vars.$border-radius;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  font-family: vars.$font-family;
+
+  .back-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: vars.$light-bg;
+    background-color: vars.$primary-color;
+    border: none;
+    border-radius: vars.$border-radius;
+    cursor: pointer;
+    align-self: flex-start;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: vars.$hover-color;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .header {
+    text-align: center;
+
+    .title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: vars.$primary-color;
+      margin-bottom: 10px;
+    }
+
+    .year {
+      font-size: 1.2rem;
+      color: vars.$secondary-text-color;
+      font-style: italic;
+    }
+  }
+
+  .poster {
+    max-width: 100%;
+    border-radius: vars.$border-radius;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    margin-bottom: 20px;
+  }
+
+  .description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: vars.$text-color;
+    margin-bottom: 20px;
+  }
+
+  .additional-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    color: vars.$secondary-text-color;
+    margin-bottom: 20px;
+
+    .info-item {
+      display: flex;
+      flex-direction: column;
+
+      span {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .info-text {
+        font-weight: normal;
+      }
+    }
+  }
+
+  .error-message {
+    font-size: 1.2rem;
+    color: #ff4d4d; /* Error color */
+    text-align: center;
+  }
+}
