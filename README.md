@@ -2,32 +2,29 @@
 
 ## Description
 
-Movie App is a web application that allows users to search for movies, view details, and save their favorite movies. It is built using modern web technologies and follows best practices for performance and accessibility.
+Movie App is a web application that allows users to search for movies, view details. It is built using modern web technologies and follows best practices for performance and accessibility.
 
 ## Features
 
 - Search for movies by title
 - View detailed information about each movie
-- Save favorite movies to a personal list
 - Responsive design for mobile and desktop
 
 ## Technologies Used
 
+- Typescript (ES6+)
 - HTML5
 - CSS3
-- JavaScript (ES6+)
+- SCSS
 - React
 - Redux
-- Node.js
-- Express
-- MongoDB
 
 ## Installation
 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/omeravsar/movie-app.git
+git clone https://github.com/Solarkadakiadam/movie-app-2.0.git
 ```
 
 2. Navigate to the project directory:
@@ -53,10 +50,10 @@ REACT_APP_OMDB_API_KEY=your_api_key_here
 1. Start the development server:
 
 ```bash
-npm start
+npm run dev
 ```
 
-2. Open your browser and navigate to `http://localhost:3000`
+2. Open your browser and navigate to `http://localhost:5173`
 
 ## Contributing
 
@@ -68,4 +65,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contact
 
-For any questions or feedback, please contact [Omer Avsar](mailto:omeravsar@example.com).
+For any questions or feedback, please contact [Ömer Avşar](mailto:omeravsaroa@gmail.com).
