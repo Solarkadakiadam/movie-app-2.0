@@ -7,7 +7,7 @@ import { fetchMovieDetailAsync } from "../redux/movieDetailSlice";
 const MovieDetailPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { imdbID } = useParams<{ imdbID: string }>();
-  const navigate = useNavigate(); // Use this hook for navigation
+  const navigate = useNavigate();
 
   const { movieDetail, loading, error } = useSelector(
     (state: RootState) => state.movieDetail
@@ -19,50 +19,62 @@ const MovieDetailPage: React.FC = () => {
     }
   }, [dispatch, imdbID]);
 
-  if (loading) return <p className="loading">Loading...</p>;
-  if (error) return <p className="error">{error}</p>;
-
-  // Handle back button click
   const handleBack = () => {
-    navigate(-1); // Go back to the previous page
+    navigate("/");
   };
 
-  if (movieDetail) {
+  if (loading) {
     return (
       <div className="movie-detail">
-        {/* Back Button */}
-        <button className="back-button" onClick={handleBack}>
-          &larr; Back
-        </button>
-
-        <div className="header">
-          <h1 className="title">
-            {movieDetail.Title} ({movieDetail.Year})
-          </h1>
-          <p className="year">{movieDetail.Year}</p>
+        <div className="loading-container">
+          <div className="spinner"></div>
+          <p className="loading-text">Fetching movie details...</p>
         </div>
-
-        <img
-          className="poster"
-          src={movieDetail.Poster}
-          alt={movieDetail.Title}
-        />
-
-        <p className="description">
-          <strong>Genre:</strong> {movieDetail.Genre}
-        </p>
-        <p className="description">
-          <strong>Director:</strong> {movieDetail.Director}
-        </p>
-        <p className="description">
-          <strong>Plot:</strong> {movieDetail.Plot}
-        </p>
-        {/* Add more details as needed */}
       </div>
     );
   }
 
-  return <div>no movie</div>;
+  return (
+    <div className="movie-detail">
+      <button className="back-button" onClick={handleBack}>
+        &larr; Back
+      </button>
+
+      {movieDetail?.Response === "True" ? (
+        <div className="content">
+          <img
+            className="poster"
+            src={movieDetail.Poster}
+            alt={movieDetail.Title}
+          />
+          <div className="info">
+            <h1 className="title">{movieDetail.Title}</h1>
+            <p className="year">{movieDetail.Year}</p>
+            <p className="description">
+              <strong>Duration:</strong> {movieDetail.Runtime}
+            </p>
+            <p className="description">
+              <strong>Genre:</strong> {movieDetail.Genre}
+            </p>
+            <p className="description">
+              <strong>Director:</strong> {movieDetail.Director}
+            </p>
+            <p className="description">
+              <strong>Cast:</strong> {movieDetail.Actors}
+            </p>
+            <p className="description">
+              <strong>IMDb Rating:</strong> {movieDetail.imdbRating}
+            </p>
+            <p className="description">
+              <strong>Plot:</strong> {movieDetail.Plot}
+            </p>
+          </div>
+        </div>
+      ) : (
+        <div className="error">An error occurred: {error}</div>
+      )}
+    </div>
+  );
 };
 
 export default MovieDetailPage;

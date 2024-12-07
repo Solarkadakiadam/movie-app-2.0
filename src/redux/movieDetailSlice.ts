@@ -1,25 +1,28 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchMovieDetail, MovieDetail } from "../api/omdb";
+import { fetchMovieDetail } from "../api/omdb";
+import { MovieDetail } from "../api/types";
 
 interface MovieDetailState {
-  movieDetail: MovieDetail | null; // Add movieDetail to hold movie detail data
+  movieDetail: MovieDetail | null;
   loading: boolean;
   error: string | null;
 }
 
-// Initial state including movieDetail
 const initialState: MovieDetailState = {
   movieDetail: null,
   loading: false,
   error: null,
 };
 
-// Async thunk for fetching movie details
 export const fetchMovieDetailAsync = createAsyncThunk(
   "movieDetail/fetchMovieDetail",
-  async (imdbID: string) => {
-    const response = await fetchMovieDetail(imdbID);
-    return response.data;
+  async (imdbID: string, { rejectWithValue }) => {
+    try {
+      const data = await fetchMovieDetail(imdbID);
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.message || "Failed to fetch movie detail");
+    }
   }
 );
 
@@ -28,20 +31,18 @@ const movieDetailSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    // Handling movies fetching
     builder
-      // Handling movie detail fetching
       .addCase(fetchMovieDetailAsync.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(fetchMovieDetailAsync.fulfilled, (state, action) => {
         state.loading = false;
-        state.movieDetail = action.payload; // Set the movie detail to the state
+        state.movieDetail = action.payload;
       })
       .addCase(fetchMovieDetailAsync.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Failed to fetch movie detail";
+        state.error = action.payload as string;
       });
   },
 });

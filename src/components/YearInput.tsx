@@ -22,7 +22,7 @@ const YearInput: React.FC = () => {
   const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const year = e.target.value;
     setYearInput(year);
-    debouncedYearChange(year); // Call debounced year
+    debouncedYearChange(year);
   };
 
   return (

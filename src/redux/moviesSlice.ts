@@ -1,14 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchMovies } from "../api/omdb";
-
-// Define the types for Movie and MoviesState
-interface Movie {
-  imdbID: string;
-  Title: string;
-  Year: string;
-  Type: string;
-  Poster: string;
-}
+import { Movie } from "../api/types";
 
 interface MoviesState {
   movies: Movie[];
@@ -21,7 +13,6 @@ interface MoviesState {
   totalResults: number;
 }
 
-// Initial state
 const initialState: MoviesState = {
   movies: [],
   searchQuery: "pokemon",
@@ -33,7 +24,6 @@ const initialState: MoviesState = {
   totalResults: 0,
 };
 
-// Async thunk for fetching movies
 export const fetchMoviesAsync = createAsyncThunk(
   "movies/fetchMovies",
   async (params: {
@@ -43,10 +33,12 @@ export const fetchMoviesAsync = createAsyncThunk(
     type: string;
   }) => {
     const { searchQuery, page, year, type } = params;
-
-    const response = await fetchMovies(searchQuery, page, year, type);
-    await new Promise((resolve) => setTimeout(resolve, 4000));
-    return response.data;
+    try {
+      const response = await fetchMovies(searchQuery, page, year, type);
+      return response;
+    } catch (error: any) {
+      throw new Error(error.message || "Failed to fetch movies");
+    }
   }
 );
 
@@ -68,7 +60,6 @@ const moviesSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // Handling movies fetching
     builder
       .addCase(fetchMoviesAsync.pending, (state) => {
         state.loading = true;

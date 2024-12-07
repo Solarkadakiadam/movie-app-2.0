@@ -14,7 +14,7 @@ button {
     cursor: not-allowed;
   }
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: vars.$hover-color;
   }
 }

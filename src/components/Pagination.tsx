@@ -24,7 +24,7 @@ const Pagination: React.FC = () => {
       >
         Previous
       </button>
-      <p>Current Page: {page}</p>
+      <p>Page: {page}</p>
       <button
         disabled={!hasNextPage || loading}
         onClick={() => handlePageChange(page + 1)}

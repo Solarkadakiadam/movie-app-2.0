@@ -1,4 +1,5 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
+import { ApiResponse, MovieDetail } from "./types";
 
 const API_KEY = import.meta.env.VITE_OMDB_API_KEY;
 const BASE_URL = "http://www.omdbapi.com/";
@@ -7,75 +8,54 @@ const omdbApi = axios.create({
   baseURL: BASE_URL,
 });
 
-interface Movie {
-  imdbID: string;
-  Title: string;
-  Year: string;
-  Type: string;
-  Poster: string;
-}
-
-interface ApiResponse {
-  Search: Movie[];
-  totalResults: string;
-  Response: string;
-  Error?: string;
-}
-
-export interface MovieDetail {
-  imdbID: string;
-  Title: string;
-  Year: string;
-  Rated: string;
-  Released: string;
-  Runtime: string;
-  Genre: string;
-  Director: string;
-  Writer: string;
-  Actors: string;
-  Plot: string;
-  Language: string;
-  Country: string;
-  Awards: string;
-  Poster: string;
-  Ratings: Array<{ Source: string; Value: string }>;
-  Metascore: string;
-  imdbRating: string;
-  imdbVotes: string;
-  Type: string;
-  DVD: string;
-  BoxOffice: string;
-  Production: string;
-  Website: string;
-  Response: string;
-}
-
-export const fetchMovieDetail = (
+export const fetchMovieDetail = async (
   imdbID: string
-): Promise<AxiosResponse<MovieDetail>> => {
-  return omdbApi.get<MovieDetail>("/", {
+): Promise<MovieDetail> => {
+  const response = await omdbApi.get<
+    MovieDetail & { Response: string; Error?: string }
+  >("/", {
     params: {
       i: imdbID,
       r: "json",
       apiKey: API_KEY,
     },
   });
+
+  if (response.data.Response === "False") {
+    throw new Error(response.data.Error || "Unknown error occurred");
+  }
+
+  return response.data;
 };
 
-export const fetchMovies = (
+export const fetchMovies = async (
   searchQuery: string = "pokemon",
   page: number = 1,
   year: string = "",
   type: string = "movie"
-): Promise<AxiosResponse<ApiResponse>> => {
-  return omdbApi.get<ApiResponse>("/", {
-    params: {
-      s: searchQuery,
-      page,
-      y: year,
-      type,
-      r: "json",
-      apiKey: API_KEY,
-    },
-  });
+): Promise<ApiResponse> => {
+  try {
+    const response = await omdbApi.get<
+      ApiResponse & { Response: string; Error?: string }
+    >("/", {
+      params: {
+        s: searchQuery,
+        page,
+        y: year,
+        type,
+        r: "json",
+        apiKey: API_KEY,
+      },
+    });
+
+    if (response.data.Response === "False") {
+      throw new Error(response.data.Error || "Unknown error occurred");
+    }
+
+    return response.data;
+  } catch (error: any) {
+    throw new Error(
+      error.response?.data?.Error || error.message || "Failed to fetch movies"
+    );
+  }
 };

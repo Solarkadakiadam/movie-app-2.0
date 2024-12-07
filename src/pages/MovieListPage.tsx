@@ -15,7 +15,7 @@ const MovieListPage: React.FC = () => {
 
   useEffect(() => {
     if (searchQuery) {
-      dispatch(setPage(1)); // Reset page to 1 when search query changes
+      dispatch(setPage(1));
       dispatch(fetchMoviesAsync({ searchQuery, page: 1, year, type }));
     }
   }, [dispatch, searchQuery, year, type]);

@@ -23,7 +23,7 @@ const SearchInput: React.FC = () => {
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
     setSearchInput(query);
-    debouncedSearch(query); // Call debounced search
+    debouncedSearch(query);
   };
 
   return (
