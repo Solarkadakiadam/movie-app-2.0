@@ -72,6 +72,8 @@ const moviesSlice = createSlice({
       })
       .addCase(fetchMoviesAsync.rejected, (state, action) => {
         state.loading = false;
+        state.movies = [];
+        state.totalResults = 0;
         state.error = action.error.message || "Failed to fetch movies";
       });
   },

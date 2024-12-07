@@ -13,7 +13,6 @@ button {
     background-color: #ccc;
     cursor: not-allowed;
   }
-
   &:hover:not(:disabled) {
     background-color: vars.$hover-color;
   }

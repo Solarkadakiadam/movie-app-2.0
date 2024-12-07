@@ -9,6 +9,7 @@ const Pagination: React.FC = () => {
     (state: RootState) => state.movies
   );
 
+
   const hasNextPage = page * 10 < totalResults;
 
   const handlePageChange = (newPage: number) => {
