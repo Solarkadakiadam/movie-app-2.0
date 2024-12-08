@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, AppDispatch } from "../redux/Store";
+import { RootState, AppDispatch } from "../redux/Store-";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchMovieDetailAsync } from "../redux/MovieDetailSlice-";
 

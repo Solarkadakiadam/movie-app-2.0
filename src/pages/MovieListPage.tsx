@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMoviesAsync, setPage } from "../redux/MoviesSlice-";
-import { RootState, AppDispatch } from "../redux/Store";
+import { RootState, AppDispatch } from "../redux/Store-";
 import Filters from "../components/Filters";
 import MovieList from "../components/MovieList";
 import Pagination from "../components/Pagination";
