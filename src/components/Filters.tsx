@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setType } from "../redux/moviesSlice";
-import { RootState, AppDispatch } from "../redux/store";
+import { setType } from "../redux/MoviesSlice-";
+import { RootState, AppDispatch } from "../redux/Store";
 import YearInput from "./YearInput";
 import SearchInput from "./SearchInput";
 

@@ -1,6 +1,6 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { fetchMovies } from "../api/omdb";
-import { Movie } from "../api/types";
+import { Movie } from "../types/types";
 
 interface MoviesState {
   movies: Movie[];
@@ -33,12 +33,8 @@ export const fetchMoviesAsync = createAsyncThunk(
     type: string;
   }) => {
     const { searchQuery, page, year, type } = params;
-    try {
-      const response = await fetchMovies(searchQuery, page, year, type);
-      return response;
-    } catch (error: any) {
-      throw new Error(error.message || "Failed to fetch movies");
-    }
+    const response = await fetchMovies(searchQuery, page, year, type);
+    return response;
   }
 );
 
@@ -46,16 +42,16 @@ const moviesSlice = createSlice({
   name: "movies",
   initialState,
   reducers: {
-    setSearchQuery: (state, action) => {
+    setSearchQuery: (state, action: PayloadAction<string>) => {
       state.searchQuery = action.payload;
     },
-    setPage: (state, action) => {
+    setPage: (state, action: PayloadAction<number>) => {
       state.page = action.payload;
     },
-    setYear: (state, action) => {
+    setYear: (state, action: PayloadAction<string>) => {
       state.year = action.payload;
     },
-    setType: (state, action) => {
+    setType: (state, action: PayloadAction<string>) => {
       state.type = action.payload;
     },
   },

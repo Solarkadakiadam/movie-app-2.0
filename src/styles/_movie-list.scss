@@ -39,8 +39,8 @@
 
 .movie-list-container {
   position: relative;
-  border-radius: vars.$border-radius; // Ensure the radius applies to the container
-  overflow: hidden; // Keep the border-radius visible during blur
+  border-radius: vars.$border-radius;
+  overflow: hidden; 
 
   .loading-overlay {
     position: absolute;
