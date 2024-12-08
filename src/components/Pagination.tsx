@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPage, fetchMoviesAsync } from "../redux/MoviesSlice-";
-import { AppDispatch, RootState } from "../redux/Store-";
+import { setPage, fetchMoviesAsync } from "../redux/MoviesSlice";
+import { AppDispatch, RootState } from "../redux/Store";
 
 const Pagination: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();

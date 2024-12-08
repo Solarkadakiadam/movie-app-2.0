@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "lodash";
-import { setYear } from "../redux/MoviesSlice-";
-import { AppDispatch, RootState } from "../redux/Store-";
+import { setYear } from "../redux/MoviesSlice";
+import { AppDispatch, RootState } from "../redux/Store";
 
 const YearInput: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();

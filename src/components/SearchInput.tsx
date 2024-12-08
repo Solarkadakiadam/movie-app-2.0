@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { debounce } from "lodash";
-import { setSearchQuery } from "../redux/MoviesSlice-";
-import { AppDispatch, RootState } from "../redux/Store-";
+import { setSearchQuery } from "../redux/MoviesSlice";
+import { AppDispatch, RootState } from "../redux/Store";
 import { useSelector } from "react-redux";
 
 const SearchInput: React.FC = () => {
